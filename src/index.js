@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require('cors');
-const path = require('path');
+const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.post("/api/verify", (req, res) => {
+  console.log("current cookies", res.cookies);
   let options = {
     maxAge: 1000 * 60 * 15, // would expire after 15 minutes
     httpOnly: true, // The cookie only accessible by the web server
