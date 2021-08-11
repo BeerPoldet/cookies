@@ -1,5 +1,5 @@
 const token = "fake_token";
-const host = "http://localhost:3000"
+const host = "https://cookies-seven.vercel.app"
 
 function verityToken() {
   return fetch(host + "/verify", {
