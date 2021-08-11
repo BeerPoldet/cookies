@@ -11,12 +11,12 @@ function verityToken(user_token_from_button) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("COOKIE", document.cookie);
   const user_session_button = document.querySelector(
     "#check_user_session_button"
   );
   const result_label = document.querySelector("#result");
   user_session_button.addEventListener("click", () => {
+    result_label.innerHTML = "Verifing: " + user_token_from_button;
     const user_token_from_button = localStorage.getItem(
       "user_token_from_button"
     );

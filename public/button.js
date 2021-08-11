@@ -12,12 +12,19 @@ function issueToken() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("COOKIE", document.cookie);
-  document.querySelector("#launch_message_spring").addEventListener('click', () => {
-    localStorage.setItem("user_token_from_button", user_token);
-    issueToken().then(() => {
-      console.log("verified");
+  const state = {};
+  const label = document.querySelector("#launch_message_spring_label");
+  window.addEventListener("message", (event) => {
+    console.log(event);
+    state.data = event.data;
+    label.innerHTML = state.data;
+  });
+  document
+    .querySelector("#launch_message_spring_button")
+    .addEventListener("click", () => {
+      localStorage.setItem("user_token_from_button", state.data || user_token);
+      issueToken().then(() => {
+        console.log("verified");
+      });
     });
-  })
 });
-
