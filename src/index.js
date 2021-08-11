@@ -11,7 +11,7 @@ app.use("/public", express.static(path.resolve("public")));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.post("/verify", (req, res) => {
+app.post("/api/verify", (req, res) => {
   let options = {
     maxAge: 1000 * 60 * 15, // would expire after 15 minutes
     httpOnly: true, // The cookie only accessible by the web server
