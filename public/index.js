@@ -13,6 +13,7 @@ function verityToken() {
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("ready");
+  console.log("COOKIE", document.cookie)
   verityToken().then(() => {
     console.log("verified");
   });
