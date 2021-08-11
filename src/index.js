@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.resolve("public")));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
