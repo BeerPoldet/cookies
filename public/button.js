@@ -14,6 +14,7 @@ function issueToken() {
 document.addEventListener("DOMContentLoaded", () => {
   console.log("COOKIE", document.cookie);
   document.querySelector("#launch_message_spring").addEventListener('click', () => {
+    localStorage.setItem("user_token_from_button", user_token);
     issueToken().then(() => {
       console.log("verified");
     });
