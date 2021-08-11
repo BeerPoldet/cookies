@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const result_label = document.querySelector("#result");
   user_session_button.addEventListener("click", () => {
-    result_label.innerHTML = "Verifing: " + user_token_from_button;
     const user_token_from_button = localStorage.getItem(
       "user_token_from_button"
     );
+    result_label.innerHTML = "Verifing: " + user_token_from_button;
     if (user_token_from_button) {
       verityToken(user_token_from_button).then(() => {
         console.log("verified");

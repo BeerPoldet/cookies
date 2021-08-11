@@ -6,12 +6,4 @@ document.addEventListener("DOMContentLoaded", () => {
   input.addEventListener("input", (e) => {
     iframe.postMessage(e.target.value, host);
   });
-  document
-    .querySelector("#launch_message_spring_button")
-    .addEventListener("click", () => {
-      localStorage.setItem("user_token_from_button", input.value || user_token);
-      issueToken().then(() => {
-        console.log("verified");
-      });
-    });
 });
