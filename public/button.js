@@ -23,10 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelector("#launch_message_spring_button")
     .addEventListener("click", () => {
       status.innerHTML = "Issuing a token for " + state.data;
-      issueToken(state.data).then(() => {
-        console.log("verified");
-        localStorage.setItem("user_token_from_button", state.data);
-        window.open(host, "_blank");
-      });
+      issueToken(state.data)
+        .then(() => delay(1))
+        .then(() => {
+          console.log("verified");
+          localStorage.setItem("user_token_from_button", state.data);
+          window.open(host + "/public", "_blank");
+        });
     });
 });
+
+function delay(seconds) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, seconds * 1000);
+  });
+}
