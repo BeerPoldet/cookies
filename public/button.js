@@ -1,13 +1,12 @@
-const user_token = "fake_token";
 const host = "https://cookies-seven.vercel.app";
 
-function issueToken() {
+function issueToken(user) {
   return fetch(host + "/api/issue-token", {
     headers: {
       "Content-Type": "application/json",
     },
     method: "POST",
-    body: JSON.stringify({ user_token }),
+    body: JSON.stringify({ user }),
   });
 }
 
@@ -19,12 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
     state.data = event.data;
     label.innerHTML = state.data;
   });
+  const status = document.querySelector("#launch_message_spring_status");
   document
     .querySelector("#launch_message_spring_button")
     .addEventListener("click", () => {
-      localStorage.setItem("user_token_from_button", state.data || user_token);
-      issueToken().then(() => {
+      status.innerHTML = "Issuing a token for " + state.data;
+      issueToken(state.data).then(() => {
         console.log("verified");
+        localStorage.setItem("user_token_from_button", state.data);
+        window.open(host, "_blank");
       });
     });
 });

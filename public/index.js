@@ -1,12 +1,12 @@
 const host = "https://cookies-seven.vercel.app";
 
-function verityToken(user_token_from_button) {
+function verityToken(saved_user_token) {
   return fetch(host + "/api/verify-token", {
     headers: {
       "Content-Type": "application/json",
     },
     method: "POST",
-    body: JSON.stringify({ user_token: user_token_from_button }),
+    body: JSON.stringify({ user_token: saved_user_token }),
   });
 }
 
@@ -15,16 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
     "#check_user_session_button"
   );
   const result_label = document.querySelector("#result");
-  user_session_button.addEventListener("click", () => {
-    const user_token_from_button = localStorage.getItem(
-      "user_token_from_button"
-    );
-    result_label.innerHTML = "Verifing: " + user_token_from_button;
-    if (user_token_from_button) {
-      verityToken(user_token_from_button).then(() => {
+
+  function verify() {
+    const saved_user_token = localStorage.getItem("user_token_from_button");
+    result_label.innerHTML = "Verifing: " + saved_user_token;
+    if (saved_user_token) {
+      verityToken(saved_user_token).then(() => {
         console.log("verified");
-        result_label.innerHTML = "Verified: " + user_token_from_button;
+        result_label.innerHTML = "Verified: " + saved_user_token;
       });
     }
+  }
+
+  user_session_button.addEventListener("click", () => {
+    verify();
   });
+
+  verify();
 });
