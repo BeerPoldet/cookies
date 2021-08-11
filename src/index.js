@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.post("/api/issue-token", (req, res) => {
-  console.log("current cookies", res.cookies);
+  console.log("current cookies", req.cookies);
   let options = {
     maxAge: 1000 * 60 * 15, // would expire after 15 minutes
     httpOnly: true, // The cookie only accessible by the web server
@@ -21,12 +21,12 @@ app.post("/api/issue-token", (req, res) => {
 
   // Set cookie
   res.cookie("message_sprint_secure_token", "fake_secure_token", options);
-  res.json({ cookie: res.cookies });
+  res.json({ cookie: req.cookies });
 });
 
 app.post("/api/verify-token", (req, res) => {
-  console.log("current cookies", res.cookies);
-  res.json({ cookie: res.cookies });
+  console.log("current cookies", req.cookies);
+  res.json({ cookie: req.cookies });
 });
 
 const port = process.env.PORT || 3000;
