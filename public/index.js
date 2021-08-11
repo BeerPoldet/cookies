@@ -2,7 +2,7 @@ const token = "fake_token";
 const host = "https://cookies-seven.vercel.app"
 
 function verityToken() {
-  return fetch(host + "/verify", {
+  return fetch(host + "/api/verify", {
     headers: {
       "Content-Type": "application/json",
     },
