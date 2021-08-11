@@ -1,6 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
 
@@ -8,26 +6,6 @@ const app = express();
 
 app.use(cors());
 app.use("/public", express.static(path.resolve("public")));
-app.use(bodyParser.json());
-app.use(cookieParser());
-
-app.post("/api/issue-token", (req, res) => {
-  console.log("current cookies", req.cookies);
-  let options = {
-    maxAge: 1000 * 60 * 15, // would expire after 15 minutes
-    httpOnly: true, // The cookie only accessible by the web server
-    // signed: true, // Indicates if the cookie should be signed
-  };
-
-  // Set cookie
-  res.cookie("message_sprint_secure_token", "fake_secure_token", options);
-  res.json({ cookie: req.cookies });
-});
-
-app.post("/api/verify-token", (req, res) => {
-  console.log("current cookies", req.cookies);
-  res.json({ cookie: req.cookies });
-});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
