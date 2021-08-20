@@ -11,7 +11,8 @@ app.use("/", express.static(path.resolve("public")));
 app.use(bodyParser.json());
 
 // const openAPIURL = "https://open-api-dev.ifyoucan.com"
-const openAPIURL = "http://localhost:3000";
+// const openAPIURL = "http://localhost:3000";
+const openAPIURL = "https://munission-demo.vercel.app";
 
 const apiClient = {
   issueOneTimeToken: (apiKey, username) =>
@@ -25,6 +26,7 @@ const apiClient = {
 };
 
 app.get("/api/messagespring/:apiKey/:username", (req, res) => {
+  console.log(JSON.stringify(process.env))
   apiClient
     .issueOneTimeToken(req.params.apiKey, req.params.username)
     .then((response) => {
