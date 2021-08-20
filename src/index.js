@@ -14,17 +14,19 @@ app.use(bodyParser.json());
 // const openAPIURL = "https://open-api-dev.ifyoucan.com"
 const openAPIURL =
   process.env.NODE_ENV !== "production"
-    ? `http://localhost:${port}`
-    : "https://munission-demo.vercel.app";
+    // ? `http://localhost:${port}`
+    ? "https://open-api-qa.ifyoucan.com"
+    : "https://open-api-qa.ifyoucan.com";
 
 const placeAdminURL =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000"
+    // ? "http://localhost:3000"
+    ? "https://notifyme-qa.ifyoucan.com"
     : "https://notifyme-qa.ifyoucan.com";
 
 const apiClient = {
   issueOneTimeToken: (apiKey, username) =>
-    fetch(openAPIURL + "/v1/api/token", {
+    fetch(openAPIURL + "/v1/api/teams/member/token", {
       headers: {
         "Content-Type": "application/json",
       },
