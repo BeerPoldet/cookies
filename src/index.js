@@ -41,7 +41,7 @@ app.get("/api/messagespring/:apiKey/:username", (req, res) => {
         return res.redirect("/error.html");
       }
       return response.json().then((json) => {
-        res.redirect(placeAdminURL + "/otc-login?token=" + json.token);
+        res.redirect(placeAdminURL + "/sso?token=" + json.token);
       });
     });
 });
