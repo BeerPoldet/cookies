@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
 
 const app = express();
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use("/", express.static(path.resolve("public")));
@@ -13,8 +14,13 @@ app.use(bodyParser.json());
 // const openAPIURL = "https://open-api-dev.ifyoucan.com"
 const openAPIURL =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000"
+    ? `http://localhost:${port}`
     : "https://munission-demo.vercel.app";
+
+const placeAdminURL =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000"
+    : "https://notifyme-qa.ifyoucan.com";
 
 const apiClient = {
   issueOneTimeToken: (apiKey, username) =>
@@ -35,7 +41,7 @@ app.get("/api/messagespring/:apiKey/:username", (req, res) => {
         return res.redirect("/error.html");
       }
       return response.json().then((json) => {
-        res.redirect("/success.html?" + json.token);
+        res.redirect(placeAdminURL + "/otc-login?token=" + json.token);
       });
     });
 });
@@ -66,7 +72,6 @@ app.post("/v1/api/team-member", (req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Application is running at ${port}`);
 });
