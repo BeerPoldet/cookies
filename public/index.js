@@ -1,12 +1,14 @@
-const host = "https://cookies-seven.vercel.app";
+$(function () {
+  const api_key = $("#api_key");
+  const username = $("#username");
+  $("#launch-app-btn").on("click", () => {
+    if (!api_key.val() || !username.val()) {
+      return;
+    }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const result_label = document.querySelector("#result");
-
-  function verify() {
-    const saved_user_token = localStorage.getItem("user_token_from_button");
-    result_label.innerHTML = "Saved token: " + saved_user_token;
-  }
-
-  verify();
+    window.open(
+      ["/api/messagespring", api_key.val(), username.val()].join("/"),
+      "_blank"
+    );
+  });
 });
