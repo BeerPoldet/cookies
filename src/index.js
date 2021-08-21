@@ -29,6 +29,7 @@ const apiClient = {
     fetch(openAPIURL + "/v1/api/teams/member/token", {
       headers: {
         "Content-Type": "application/json",
+        'origin': "https://munission-demo.vercel.app",
       },
       method: "POST",
       body: JSON.stringify({ apiKey, email: username }),
@@ -43,7 +44,7 @@ app.get("/api/messagespring/:apiKey/:username", (req, res) => {
         return res.redirect("/error.html");
       }
       return response.json().then((json) => {
-        res.redirect(placeAdminURL + "/sso?token=" + json.token);
+        res.redirect(placeAdminURL + "/sso?token=" + json.hash);
       });
     });
 });
