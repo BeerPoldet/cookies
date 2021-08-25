@@ -62,7 +62,7 @@ Code: **401** (Error)
 
 In the case of successfully getting the one time token, redirect the web page to:
 ```
-https://notifyme-qa.ifyoucan.com/sso?token={one_time_token}
+https://notifyme.ifyoucan.com/sso?token={one_time_token}
 ```
 
 Where you substitute `{one_time_token}` with the token received from the #1. MessageSpring will automatially sign the user on.
