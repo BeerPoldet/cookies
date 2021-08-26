@@ -11,16 +11,31 @@ app.use(cors());
 app.use("/", express.static(path.resolve("public")));
 app.use(bodyParser.json());
 
-// const openAPIURL = "https://open-api-dev.ifyoucan.com"
-const openAPIURL = (env) =>
-  env === "prod"
-    ? "https://open-api.ifyoucan.com"
-    : "https://open-api-qa.ifyoucan.com";
+const openAPIURL = (env) => {
+  switch (env) {
+    case "prod":
+      return "https://open-api.ifyoucan.com";
+    case "qa":
+      return "https://open-api-qa.ifyoucan.com";
+    case "dev":
+      return "https://open-api-dev.ifyoucan.com";
+    default:
+      return "localhost:3001";
+  }
+};
 
-const placeAdminURL = (env) =>
-  env === "prod"
-    ? "https://notifyme.ifyoucan.com"
-    : "https://notifyme-qa.ifyoucan.com";
+const placeAdminURL = (env) => {
+  switch (env) {
+    case "prod":
+      return "https://notifyme.ifyoucan.com";
+    case "qa":
+      return "https://notifyme-qa.ifyoucan.com";
+    case "dev":
+      return "https://notifyme-dev.ifyoucan.com";
+    default:
+      return "localhost:3001";
+  }
+};
 
 const apiClient = {
   issueOneTimeToken: (env, apiKey, username) =>
