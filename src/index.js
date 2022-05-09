@@ -24,14 +24,14 @@ const openAPIURL = (env) => {
   }
 };
 
-const placeAdminURL = (env) => {
+const dashboardURL = (env) => {
   switch (env) {
     case "prod":
-      return "https://notifyme.ifyoucan.com";
+      return "https://dashboad.messagespring.com";
     case "qa":
-      return "https://notifyme-qa.ifyoucan.com";
+      return "https://dashboad-qa.messagespring.com";
     case "dev":
-      return "https://notifyme-dev.ifyoucan.com";
+      return "https://dashboad-dev.messagespring.com";
     default:
       return "localhost:3001";
   }
@@ -57,7 +57,7 @@ app.get("/api/messagespring/:env/:apiKey/:username", (req, res) => {
         return res.redirect("/error.html");
       }
       return response.json().then((json) => {
-        res.redirect(placeAdminURL(req.params.env) + "/sso?token=" + json.hash);
+        res.redirect(dashboardURL(req.params.env) + "/sso?token=" + json.hash);
       });
     });
 });
