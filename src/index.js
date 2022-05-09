@@ -27,11 +27,11 @@ const openAPIURL = (env) => {
 const dashboardURL = (env) => {
   switch (env) {
     case "prod":
-      return "https://dashboad.messagespring.com";
+      return "https://dashboard.messagespring.com";
     case "qa":
-      return "https://dashboad-qa.messagespring.com";
+      return "https://dashboard-qa.messagespring.com";
     case "dev":
-      return "https://dashboad-dev.messagespring.com";
+      return "https://dashboard-dev.messagespring.com";
     default:
       return "localhost:3001";
   }
