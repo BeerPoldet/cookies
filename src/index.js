@@ -3,6 +3,9 @@ const cors = require("cors");
 const path = require("path");
 const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
+const { DateTime } = require("luxon");
+const { Promise } = require("node-fetch");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -57,10 +60,22 @@ app.get("/api/messagespring/:env/:apiKey/:username", (req, res) => {
         return res.redirect("/error.html");
       }
       return response.json().then((json) => {
-        res.redirect(dashboardURL(req.params.env) + "/sso?token=" + json.hash);
+        const params = new URLSearchParams({
+          token: json.hash,
+          ma_mode_key: createMaintenanceModeKey(),
+        });
+        const url = new URL("sso", dashboardURL(req.params.env));
+        url.search = params;
+        res.redirect(url.toString());
       });
     });
 });
+
+function createMaintenanceModeKey() {
+  let today = DateTime.utc().toFormat("yyyyMMdd");
+  let MA_KEY = `nebular::${today}`;
+  return bcrypt.hashSync(MA_KEY, 10);
+}
 
 app.post("/v1/api/token", (req, res) => {
   if (req.body.apiKey !== "abc" || req.body.email !== "def") {
