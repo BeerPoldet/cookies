@@ -103,6 +103,6 @@ app.post("/v1/api/team-member", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Application is running at ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Application is running at ${port}`);
+// });
